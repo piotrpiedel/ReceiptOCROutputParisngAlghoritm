@@ -5,7 +5,7 @@ package gdrive
 
 import util.*
 
-class ResponseRegexSplitter {
+class ResponseRegexMatcher {
 
     fun matchTitlesWithValuesToListUsingRegexOneToTenDigitsComma(tokenizedString: List<String>): List<String> =
             splitToStringListUsingRegexDelimiter(tokenizedString, regexOneToTenDigitsCommaTwoDigits)
@@ -16,7 +16,7 @@ class ResponseRegexSplitter {
     fun matchTitlesToListUsingRegexOneToTenDigitsDotOrCommaThreeDigits(stringToSplit: List<String>): List<String> =
             splitToStringListUsingRegexDelimiter(stringToSplit, regexOneToTenDigitsDotOrCommaThreeDigits)
 
-    fun splitToStringListUsingRegexDelimiter(listOfStringTokensFromResponse: List<String>, priceFormatRegex: Regex): List<String> {
+    private fun splitToStringListUsingRegexDelimiter(listOfStringTokensFromResponse: List<String>, priceFormatRegex: Regex): List<String> {
         val filteredListRemovedLettersAD: List<String> = filterSingleCharTokensWhereLetterA_D(listOfStringTokensFromResponse)
         val listOfFinallySplitStrings: MutableList<String> = mutableListOf()
         val temporaryList: MutableList<String> = mutableListOf()
@@ -34,7 +34,7 @@ class ResponseRegexSplitter {
         return listOfFinallySplitStrings
     }
 
-    fun filterSingleCharTokensWhereLetterA_D(listOfStringTokensFromResponse: List<String>): List<String> {
+    private fun filterSingleCharTokensWhereLetterA_D(listOfStringTokensFromResponse: List<String>): List<String> {
         return listOfStringTokensFromResponse
                 .filter { token -> !token.matches(regexLettersFromAtoDIgnoreCase) }
                 .filter { token -> !token.matches(regexSingleDigitZeroToNine) }

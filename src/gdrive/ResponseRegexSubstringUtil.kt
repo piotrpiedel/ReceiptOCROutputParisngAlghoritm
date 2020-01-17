@@ -1,15 +1,15 @@
 package gdrive
 
-import util.regexReceiptWord
+import util.regexForAnyReceiptFicsalWord
 
-class ResponseRegexSubstringer(private val stringToSplit: String) {
+class ResponseRegexSubstringUtil() {
 
-    fun substringAfterWordsFiscalReceiptOrReturnWholeString(): String {
-        regexReceiptWord.find(stringToSplit).let { matchedResult ->
-            return matchedResult?.let { notNullMatchResult ->
-                // fun: return substring after occurrence of one of regex above to the end of string
-                stringToSplit.substring(notNullMatchResult.range.last + 1, stringToSplit.lastIndex)
-            } ?: stringToSplit // fun: if not found return an original string
+    fun substringAfterAnyOfWordsFiscalReceiptOrReturnOrigin(string: String): String {
+        val matchedResult = regexForAnyReceiptFicsalWord.find(string)
+        if (matchedResult != null) {
+            // fun: return substring after regex occurrence to the end of string
+            return string.substring(matchedResult.range.last + 1, string.lastIndex).trim()
         }
+        return string.trim()
     }
 }

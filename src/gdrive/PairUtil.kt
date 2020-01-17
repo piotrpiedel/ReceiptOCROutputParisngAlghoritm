@@ -3,7 +3,7 @@ package gdrive
 import util.toPair
 
 
-class ResponsePairsMatcher {
+class PairUtil {
 
     fun matchStringFromListToTitleValuePair(listOfStringToMatchWithPairs: List<String>): List<Pair<String, String>> {
         val pairTitleOperationValueOperation: List<Pair<String, String>>

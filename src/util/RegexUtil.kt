@@ -14,7 +14,7 @@ val regexSingleDigitZeroToNine = Regex("[0-9]")
 // (one letter [a-d][A-D])
 val regexLetterOrDigit = Regex("[a-zA-Z0-9]")
 
-val regexReceiptWord: Regex = Regex("""\b(?i)(paragon fiskalny|fiskalny|paragon)\b""")
+val regexForAnyReceiptFicsalWord: Regex = Regex("""\b(?i)(paragon fiskalny|fiskalny|paragon)\b""")
 
 // (1-10 digits)(,)(one or more spaces)(one letter A-D)
 val regexOneToTenDigitsCommaTwoDigitsWhiteSpaceAndLetterA_D: Regex = Regex("""\b\d{1,10}[,]\d{2}\s*(?i)[A-D]{1}\b""")
