@@ -1,15 +1,15 @@
 package gdrive
 
-import util.toPair
+import util.toPairs
 
 
 class PairUtil {
 
-    fun matchStringFromListToTitleValuePair(listOfStringToMatchWithPairs: List<String>): List<Pair<String, String>> {
-        val pairTitleOperationValueOperation: List<Pair<String, String>>
-        if (!listOfStringToMatchWithPairs.isNullOrEmpty()) {
-            pairTitleOperationValueOperation = listOfStringToMatchWithPairs.toPair()
+    fun getListOfTitleToValuePairs(listOfValueTitleTokens: List<String>): List<Pair<String, String>> {
+        val titleToValuePairsList: List<Pair<String, String>>
+        if (!listOfValueTitleTokens.isNullOrEmpty()) {
+            titleToValuePairsList = listOfValueTitleTokens.toPairs()
         } else return emptyList()
-        return pairTitleOperationValueOperation
+        return titleToValuePairsList
     }
 }

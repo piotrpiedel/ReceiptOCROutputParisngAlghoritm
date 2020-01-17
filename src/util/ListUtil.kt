@@ -1,5 +1,5 @@
 package util
-fun <T> List<T>.toPair(): List<Pair<T, T>> {
+fun <T> List<T>.toPairs(): List<Pair<T, T>> {
     require(this.size % 2 == 0) { "Can't make pairs from odd number of list items!" }
     if (this.size > 2 && this.size % 2 == 0) {
         val listOfPairs: MutableList<Pair<T, T>> = mutableListOf()

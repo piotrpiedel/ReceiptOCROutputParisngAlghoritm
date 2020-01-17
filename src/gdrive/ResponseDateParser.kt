@@ -5,9 +5,10 @@ import util.getAnyDateIfStringContainsDate
 import util.stringAnyFormatToDefaultDateFormat
 import java.util.*
 
-class ResponseDateParser(private val stringToGetDateFrom: String) {
+class ResponseDateParser() {
 
-    fun getDateFromStringOrReturnTodayDate(): Date =
-            getAnyDateIfStringContainsDate(stringToGetDateFrom)
-                    ?.stringAnyFormatToDefaultDateFormat() ?: Date()
+    fun getDateFromStringOrReturnTodayDate(stringToGetDateFrom: String): Date =
+        stringToGetDateFrom.getAnyDateIfStringContainsDate()
+            ?.stringAnyFormatToDefaultDateFormat() ?: Date()
+
 }

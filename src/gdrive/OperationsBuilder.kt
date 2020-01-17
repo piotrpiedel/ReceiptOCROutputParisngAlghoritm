@@ -5,9 +5,9 @@ import operation.OperationType
 import util.parseStringWithCommaSeparatorToDouble
 import java.util.*
 
-class PairOfStringsToOperationConverter {
+class OperationsBuilder {
 
-    fun matchPairsWithTitleValueStringToListOfOperation(
+    fun buildOperationsFromTitleToValuePairToDate(
         pairTitleOperationValueOperation:
         List<Pair<String, String>>, dateOnReceipt: Date?
     ): List<Operation> {

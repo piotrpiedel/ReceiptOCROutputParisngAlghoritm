@@ -45,9 +45,9 @@ fun fixNumberOfMonth(monthNumber: Int): String {
     }
 }
 
-fun getAnyDateIfStringContainsDate(stringToCheck: String): String? {
-    val dateString_YYYY_MM_DD: String? = regexDatePattern_YYYY_MM_DD.find(stringToCheck)?.value
-    val dateString_DD_MM_YYYY: String? = regexDatePattern_DD_MM_YYYY.find(stringToCheck)?.value
+fun String.getAnyDateIfStringContainsDate(): String? {
+    val dateString_YYYY_MM_DD: String? = regexDatePattern_YYYY_MM_DD.find(this)?.value
+    val dateString_DD_MM_YYYY: String? = regexDatePattern_DD_MM_YYYY.find(this)?.value
     return when {
         dateString_YYYY_MM_DD != null -> dateString_YYYY_MM_DD
         dateString_DD_MM_YYYY != null -> dateString_DD_MM_YYYY
