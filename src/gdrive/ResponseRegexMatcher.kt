@@ -7,14 +7,14 @@ import util.*
 
 class ResponseRegexSplitter {
 
-    fun tokenizeAndSplitStringToListUsingRegexOneToTenDigitsComma(stringToSplit: String): List<String> =
-            splitToStringListUsingRegexDelimiter(stringToSplit.tokenize(), regexOneToTenDigitsCommaTwoDigits)
+    fun matchTitlesWithValuesToListUsingRegexOneToTenDigitsComma(tokenizedString: List<String>): List<String> =
+            splitToStringListUsingRegexDelimiter(tokenizedString, regexOneToTenDigitsCommaTwoDigits)
 
-    fun tokenizeAndSplitStringToListUsingRegexOneToTenDigitsDot(stringToSplit: String): List<String> =
-            splitToStringListUsingRegexDelimiter(stringToSplit.tokenize(), regexOneToTenDigitsDotTwoDigits)
+    fun matchTitlesToListUsingRegexOneToTenDigitsDot(stringToSplit: List<String>): List<String> =
+            splitToStringListUsingRegexDelimiter(stringToSplit, regexOneToTenDigitsDotTwoDigits)
 
-    fun tokenizeAndSplitStringToListUsingRegexOneToTenDigitsDotOrCommaThreeDigits(stringToSplit: String): List<String> =
-            splitToStringListUsingRegexDelimiter(stringToSplit.tokenize(), regexOneToTenDigitsDotOrCommaThreeDigits)
+    fun matchTitlesToListUsingRegexOneToTenDigitsDotOrCommaThreeDigits(stringToSplit: List<String>): List<String> =
+            splitToStringListUsingRegexDelimiter(stringToSplit, regexOneToTenDigitsDotOrCommaThreeDigits)
 
     fun splitToStringListUsingRegexDelimiter(listOfStringTokensFromResponse: List<String>, priceFormatRegex: Regex): List<String> {
         val filteredListRemovedLettersAD: List<String> = filterSingleCharTokensWhereLetterA_D(listOfStringTokensFromResponse)
