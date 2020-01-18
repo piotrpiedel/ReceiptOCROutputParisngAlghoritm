@@ -21,22 +21,30 @@ class GDriveResponseParserHelper {
         val stringAfterFiscalReceiptWords = ResponseRegexSubstringUtil()
             .substringAfterAnyOfWordsFiscalReceiptOrReturnOrigin(stringWithReplacedNewLinesChars)
 
-        tokenizeAndParseString(stringAfterFiscalReceiptWords)
-        splitStringToTokensWithRegexPattern(stringAfterFiscalReceiptWords)
+//        tokenizeAndParseString(stringAfterFiscalReceiptWords)
+//        splitStringToTokensWithRegexPattern(stringAfterFiscalReceiptWords)
+        tokenizeAndParseStringComplexAlgh(stringAfterFiscalReceiptWords)
         return googleDriveResponseParsedOperationsHolder.listOfParsedOperationsFromOCRString
     }
 
-    private fun splitStringToTokensWithRegexPattern(responseString: String) {
-        val tokensToListRegexPriceLetterMatcher = TokensToListRegexPriceLetterMatcher()
+    private fun tokenizeAndParseStringComplexAlgh(responseString: String) {
+        val responseRegexSplitter = TokensToListUsingMatchForRegexPriceAndRegexLetterInTokens()
+        val tokenizedString: List<String> = responseString.tokenize()
         addOperationsToResult(
-            tokensToListRegexPriceLetterMatcher.matchTitlesWithValuesToListUsingValueAndLetterRegex1(responseString)
+            responseRegexSplitter.matchTokensTitlesWithTokensValuesToListUsingRegex1(
+                tokenizedString
+            )
         )
-        addOperationsToResult(
-            tokensToListRegexPriceLetterMatcher.matchTitlesWithValuesToListUsingValueAndLetterRegex2(responseString)
-        )
-        addOperationsToResult(
-            tokensToListRegexPriceLetterMatcher.matchTitlesWithValuesToListUsingValueAndLetterRegex3(responseString)
-        )
+//        addOperationsToResult(
+//            responseRegexSplitter.matchTokensTitlesWithTokensValuesToListUsingRegex2(
+//                tokenizedString
+//            )
+//        )
+//        addOperationsToResult(
+//            responseRegexSplitter.matchTokensTitlesWithTokensValuesToListUsingRegex3(
+//                tokenizedString
+//            )
+//        )
     }
 
     private fun tokenizeAndParseString(responseString: String) {
