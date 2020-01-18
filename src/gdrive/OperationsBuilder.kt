@@ -7,7 +7,7 @@ import java.util.*
 
 class OperationsBuilder {
 
-    fun buildOperationsFromTitleToValuePairToDate(
+    fun buildOperationsUsingTitleToValuePairsListToDate(
         pairTitleOperationValueOperation:
         List<Pair<String, String>>, dateOnReceipt: Date?
     ): List<Operation> {

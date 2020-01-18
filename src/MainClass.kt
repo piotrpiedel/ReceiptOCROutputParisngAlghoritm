@@ -1,7 +1,8 @@
-import gdrive.ResponseRegexSubstringUtil
+import gdrive.GDriveResponseParserHelper
 import resources.receipt1
 
 fun main() {
-    val receipt1 = receipt1
-    println(ResponseRegexSubstringUtil().substringAfterAnyOfWordsFiscalReceiptOrReturnOrigin(receipt1))
+    GDriveResponseParserHelper().parseStringFromOcrToListOfOperations(resources.receipt1).forEach{
+        println(it)
+    }
 }

@@ -2,18 +2,18 @@ package gdrive
 
 import util.*
 
-class TokensToListRegexMatcher {
+class TokensToListRegexPriceMatcher {
 
-    fun matchTitlesWithValuesToListUsingRegexOneToTenDigitsComma(tokensFromString: List<String>): List<String> =
-        splitToStringListUsingRegexDelimiter(tokensFromString, regexOneToTenDigitsCommaTwoDigits)
+    fun matchTokensTitlesWithTokensValuesToListUsingRegex1(tokensFromString: List<String>): List<String> =
+        matchToStringListUsingRegexDelimiter(tokensFromString, regexOneToTenDigitsCommaTwoDigits)
 
-    fun matchTitlesToListUsingRegexOneToTenDigitsDot(tokensFromString: List<String>): List<String> =
-        splitToStringListUsingRegexDelimiter(tokensFromString, regexOneToTenDigitsDotTwoDigits)
+    fun matchTokensTitlesWithTokensValuesToListUsingRegex2(tokensFromString: List<String>): List<String> =
+        matchToStringListUsingRegexDelimiter(tokensFromString, regexOneToTenDigitsDotTwoDigits)
 
-    fun matchTitlesToListUsingRegexOneToTenDigitsDotOrCommaThreeDigits(tokensFromString: List<String>): List<String> =
-        splitToStringListUsingRegexDelimiter(tokensFromString, regexOneToTenDigitsDotOrCommaThreeDigits)
+    fun matchTokensTitlesWithTokensValuesToListUsingRegex3(tokensFromString: List<String>): List<String> =
+        matchToStringListUsingRegexDelimiter(tokensFromString, regexOneToTenDigitsDotOrCommaThreeDigits)
 
-    private fun splitToStringListUsingRegexDelimiter(listOfStringTokensFromResponse: List<String>, priceFormatRegex: Regex): List<String> {
+    private fun matchToStringListUsingRegexDelimiter(listOfStringTokensFromResponse: List<String>, priceFormatRegex: Regex): List<String> {
         val filteredListRemovedLettersAD: List<String> = filterSingleCharTokensWhereLetterA_D(listOfStringTokensFromResponse)
         val listOfFinallySplitStrings: MutableList<String> = mutableListOf()
         val temporaryList: MutableList<String> = mutableListOf()

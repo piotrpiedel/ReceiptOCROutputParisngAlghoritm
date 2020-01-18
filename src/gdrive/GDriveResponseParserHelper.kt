@@ -1,19 +1,18 @@
 package gdrive
 
 import Operation
-import resources.receipt1
 import util.tokenize
 import java.util.*
 
 @Suppress("FunctionName")
 class GDriveResponseParserHelper {
 
-    private var responseOCRString: String = receipt1
+    //    private var responseOCRString: String = receipt1
     private var dateForReceipt: Date? = null
     var dividedStringPublicForDebugging: List<String> = mutableListOf()
     private val googleDriveResponseParsedOperationsHolder = ParsedOperationsHolder()
 
-    fun parseStringFromOcrToListOfOperations(): List<Operation> {
+    fun parseStringFromOcrToListOfOperations(responseOCRString: String): List<Operation> {
         dateForReceipt = ResponseDateParser()
             .getDateFromStringOrReturnTodayDate(responseOCRString)
 
@@ -21,40 +20,53 @@ class GDriveResponseParserHelper {
             .substringAfterAnyOfWordsFiscalReceiptOrReturnOrigin(responseOCRString)
 
         tokenizeAndParseString(stringAfterFiscalReceiptWords)
+        splitStringToTokensWithRegexPattern(stringAfterFiscalReceiptWords)
         return googleDriveResponseParsedOperationsHolder.listOfParsedOperationsFromOCRString
     }
 
-    private fun tokenizeAndParseString(responseString: String) {
-        val responseRegexSplitter = TokensToListRegexMatcher()
-        val tokenizedString: List<String> = responseString.tokenize()
+    private fun splitStringToTokensWithRegexPattern(responseString: String) {
+        val tokensToListRegexPriceLetterMatcher = TokensToListRegexPriceLetterMatcher()
         addOperationsToResult(
-            tokenizedString,
-            responseRegexSplitter::matchTitlesWithValuesToListUsingRegexOneToTenDigitsComma
+            tokensToListRegexPriceLetterMatcher.matchTitlesWithValuesToListUsingValueAndLetterRegex1(responseString)
         )
         addOperationsToResult(
-            tokenizedString,
-            responseRegexSplitter::matchTitlesToListUsingRegexOneToTenDigitsDot
+            tokensToListRegexPriceLetterMatcher.matchTitlesWithValuesToListUsingValueAndLetterRegex2(responseString)
         )
         addOperationsToResult(
-            tokenizedString,
-            responseRegexSplitter::matchTitlesToListUsingRegexOneToTenDigitsDotOrCommaThreeDigits
+            tokensToListRegexPriceLetterMatcher.matchTitlesWithValuesToListUsingValueAndLetterRegex3(responseString)
         )
     }
 
-    private fun addOperationsToResult(
-        responseString: List<String>,
-        stringSplitterWithRegexFunctionToTitleValueStrings: (responseString: List<String>) -> List<String>
-    ) {
-        val listOf
-        googleDriveResponseParsedOperationsHolder.addResultToOperationList(
-            convertStringPairsTitleValueAndDateToListOfOperation(
-                stringSplitterWithRegexFunctionToTitleValueStrings.invoke(responseString)
+    private fun tokenizeAndParseString(responseString: String) {
+        val responseRegexSplitter = TokensToListRegexPriceMatcher()
+        val tokenizedString: List<String> = responseString.tokenize()
+        addOperationsToResult(
+            responseRegexSplitter.matchTokensTitlesWithTokensValuesToListUsingRegex1(
+                tokenizedString
+            )
+        )
+        addOperationsToResult(
+            responseRegexSplitter.matchTokensTitlesWithTokensValuesToListUsingRegex2(
+                tokenizedString
+            )
+        )
+        addOperationsToResult(
+            responseRegexSplitter.matchTokensTitlesWithTokensValuesToListUsingRegex3(
+                tokenizedString
             )
         )
     }
 
-    private fun convertStringPairsTitleValueAndDateToListOfOperation(stringSplitterWithRegexFunctionToTitleValueStrings: List<String>) =
-        OperationsBuilder().buildOperationsFromTitleToValuePairToDate(
+    private fun addOperationsToResult(
+        listOfMatchedPairsTitleToValue: List<String>
+    ) {
+        googleDriveResponseParsedOperationsHolder.addResultToOperationList(
+            convertTitleToValuePairsAndDateToOperationsList(listOfMatchedPairsTitleToValue)
+        )
+    }
+
+    private fun convertTitleToValuePairsAndDateToOperationsList(stringSplitterWithRegexFunctionToTitleValueStrings: List<String>) =
+        OperationsBuilder().buildOperationsUsingTitleToValuePairsListToDate(
             matchTokensListToTitleValuePairList(stringSplitterWithRegexFunctionToTitleValueStrings),
             dateForReceipt
         )
