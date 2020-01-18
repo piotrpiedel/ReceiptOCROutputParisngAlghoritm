@@ -9,10 +9,18 @@ class GDriveResponseParserHelper {
 
     //    private var responseOCRString: String = receipt1
     private var dateForReceipt: Date? = null
+    private var numberOfItems = 0;
     var dividedStringPublicForDebugging: List<String> = mutableListOf()
     private val googleDriveResponseParsedOperationsHolder = ParsedOperationsHolder()
 
-    fun parseStringFromOcrToListOfOperations(responseOCRString: String): List<Operation> {
+    fun parseStringFromOcrToListOfOperations(
+        responseOCRString: String,
+        numberOfItemsFromUserInputOnReceipt: Int?
+    ): List<Operation> {
+        if (numberOfItemsFromUserInputOnReceipt != null) {
+            numberOfItems = numberOfItemsFromUserInputOnReceipt;
+        }
+
         val stringWithReplacedNewLinesChars = responseOCRString.replace("\n", "").replace("\r", "")
 
         dateForReceipt = ResponseDateParser()
@@ -23,17 +31,18 @@ class GDriveResponseParserHelper {
 
 //        tokenizeAndParseString(stringAfterFiscalReceiptWords)
 //        splitStringToTokensWithRegexPattern(stringAfterFiscalReceiptWords)
-        tokenizeAndParseStringComplexAlgh(stringAfterFiscalReceiptWords)
+        tokenizeAndParseStringComplexAlgh(stringAfterFiscalReceiptWords, numberOfItems)
         return googleDriveResponseParsedOperationsHolder.listOfParsedOperationsFromOCRString
     }
 
-    private fun tokenizeAndParseStringComplexAlgh(responseString: String) {
+    private fun tokenizeAndParseStringComplexAlgh(
+        responseString: String,
+        numberOfItemsFromUserInputOnReceipt: Int
+    ) {
         val responseRegexSplitter = TokensToListUsingMatchForRegexPriceAndRegexLetterInTokens()
         val tokenizedString: List<String> = responseString.tokenize()
         addOperationsToResult(
-            responseRegexSplitter.matchTokensTitlesWithTokensValuesToListUsingRegex1(
-                tokenizedString
-            )
+            responseRegexSplitter.matchTokensTitlesWithTokensValuesToListUsingRegex1(tokenizedString, numberOfItemsFromUserInputOnReceipt)
         )
 //        addOperationsToResult(
 //            responseRegexSplitter.matchTokensTitlesWithTokensValuesToListUsingRegex2(
