@@ -13,11 +13,13 @@ class GDriveResponseParserHelper {
     private val googleDriveResponseParsedOperationsHolder = ParsedOperationsHolder()
 
     fun parseStringFromOcrToListOfOperations(responseOCRString: String): List<Operation> {
+        val stringWithReplacedNewLinesChars = responseOCRString.replace("\n", "").replace("\r", "")
+
         dateForReceipt = ResponseDateParser()
-            .getDateFromStringOrReturnTodayDate(responseOCRString)
+            .getDateFromStringOrReturnTodayDate(stringWithReplacedNewLinesChars)
 
         val stringAfterFiscalReceiptWords = ResponseRegexSubstringUtil()
-            .substringAfterAnyOfWordsFiscalReceiptOrReturnOrigin(responseOCRString)
+            .substringAfterAnyOfWordsFiscalReceiptOrReturnOrigin(stringWithReplacedNewLinesChars)
 
         tokenizeAndParseString(stringAfterFiscalReceiptWords)
         splitStringToTokensWithRegexPattern(stringAfterFiscalReceiptWords)
