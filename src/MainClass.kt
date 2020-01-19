@@ -1,33 +1,48 @@
 import gdrive.GDriveResponseParserHelper
 
 fun main() {
-    val gDriveResponseParserHelper = GDriveResponseParserHelper()
-    gDriveResponseParserHelper
-        .parseStringFromOcrToListOfOperations(resources.receipt1, 3).forEach {
-            println(it)
-        }
 
     println("receipt1")
-    gDriveResponseParserHelper
-        .parseStringFromOcrToListOfOperations(resources.receipt2, 3).forEach {
+    GDriveResponseParserHelper()
+        .parseStringFromOcrToListOfOperations(resources.receipt1, 4).forEach {
             println(it)
         }
 
+
     println("receipt2")
-    gDriveResponseParserHelper
-        .parseStringFromOcrToListOfOperations(resources.receipt3, 3).forEach {
+    GDriveResponseParserHelper()
+        .parseStringFromOcrToListOfOperations(resources.receipt2, 4).forEach {
+            println(it)
+        }
+
+
+    println("receipt3")
+    GDriveResponseParserHelper()
+        .parseStringFromOcrToListOfOperations(resources.receipt3, 2).forEach {
+            println(it)
+        }
+
+    println("receipt4")
+    GDriveResponseParserHelper()
+        .parseStringFromOcrToListOfOperations(resources.receipt4, 2).forEach {
             println(it)
         }
 
     println("receipt5")
-    gDriveResponseParserHelper
-        .parseStringFromOcrToListOfOperations(resources.receipt5, 3).forEach {
+    GDriveResponseParserHelper()
+        .parseStringFromOcrToListOfOperations(resources.receipt5, 5).forEach {
             println(it)
         }
 
     println("receipt6")
-    gDriveResponseParserHelper
-        .parseStringFromOcrToListOfOperations(resources.receipt6, 3).forEach {
+    GDriveResponseParserHelper()
+        .parseStringFromOcrToListOfOperations(resources.receipt6, 8).forEach {
+            println(it)
+        }
+
+    println("receipt7")
+    GDriveResponseParserHelper()
+        .parseStringFromOcrToListOfOperations(resources.receipt7, 8).forEach {
             println(it)
         }
 }

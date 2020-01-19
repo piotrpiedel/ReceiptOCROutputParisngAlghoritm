@@ -16,7 +16,6 @@ val regexLetterOrDigit = Regex("[a-zA-Z0-9]")
 
 val regexForAnyReceiptFiscalWord: Regex = Regex("""((?i)(fiskalny|paragon fiskalny|paragon))""")
 
-
 // (1-10 digits)(,)(one or more spaces)(one letter A-D)
 val regexOneToTenDigitsCommaTwoDigitsWhiteSpaceAndLetterA_D: Regex = Regex("""\b\d{1,10}[,]\d{2}\s*(?i)[A-D]{1}\b""")
 
@@ -26,7 +25,7 @@ val regexOneToTenDigitsDotTwoDigitsWhiteSpaceAndLetterA_D: Regex = Regex("""\b\d
 // (1-10 digits)(.,)(one or more spaces)(one letter A-D)
 val regexOneToTenDigitsDotOrCommaTwoDigitsWhiteSpaceAndLetterA_D: Regex = Regex("""\b\d{1,10}[.,]\d{2}\s*(?i)[A-D]{1}\b""")
 
-// (1-10 digits)(.,)(one or more spaces)(one letter A-D)
+// (1-10 digits)(.,)(one letter A-D) #,.##A-D
 val regexOneToTenDigitsDotOrCommaTwoDigitsAndLetterA_D: Regex = Regex("""\b\d{1,10}[.,]\d{2}(?i)[A-D]{1}\b""")
 
 //REGEX PRICES WITH FORMAT #,## V #.##, #,.##
@@ -37,7 +36,7 @@ val regexOneToTenDigitsCommaTwoDigits: Regex = Regex("""\b\d{1,10}[,]\d{2}""")
 val regexOneToTenDigitsDotTwoDigits: Regex = Regex("""\b\d{1,10}[.]\d{2}""")
 
 // (1-10 digits)(,)(2 digits)
-val regexOneToTenDigitsCommaOrDotTwoDigits: Regex = Regex("""\b\d{1,10}[,.]\d{2}""")
+val regexOneToTenDigitsCommaOrDotTwoDigits: Regex = Regex("""\d{1,10}[,.]\d{2}""")
 
 // (1-10 digits)(,|.)(3 digits)
 val regexOneToTenDigitsDotOrCommaThreeDigits: Regex = Regex("""\b\d{1,10}[.,]\d{3}\b""")
@@ -57,7 +56,7 @@ val regexLetterXOneToTenDigitsDotOrCommaTwoDigits: Regex = Regex("""(?i)[x]\s?\d
 val regexLetterXOneToTenDigitsDotOrCommaThreeDigits: Regex = Regex("""\b(?i)[x]\d{1,10}[.,]\d{3}\b""")
 
 //REGEX PRICES WITH FORMAT, *#,.## ||  +#,.## TokensToListUsingMatchForRegexPriceAndRegexLetterInTokens
-val regexLetterStarOneToTenDigitsDotOrCommaTwoDigits: Regex = Regex("""[*+]\s?\d{1,10}[.,]\d{2}""")
+val regexLetterStarOrPlusOneToTenDigitsDotOrCommaTwoDigits: Regex = Regex("""[*+]\s?\d{1,10}[.,]\d{2}""")
 
 //DATE REGEX
 // match (year{1 or 2}{and match 3 digits}) {- | / | \} (month{match 01-09 | 10-12}) {- | / | \} (day{01-09 | 1 or 2 and any digit(0-9)| 3 and (0 or 1)})

@@ -17,7 +17,7 @@ class GDriveResponseParserHelper {
         responseOCRString: String,
         numberOfItemsFromUserInputOnReceipt: Int?
     ): List<Operation> {
-        if (numberOfItemsFromUserInputOnReceipt != null) {
+        if (numberOfItemsFromUserInputOnReceipt!=null) {
             numberOfItems = numberOfItemsFromUserInputOnReceipt;
         }
 
@@ -35,15 +35,11 @@ class GDriveResponseParserHelper {
         return googleDriveResponseParsedOperationsHolder.listOfParsedOperationsFromOCRString
     }
 
-    private fun tokenizeAndParseStringComplexAlgh(
-        responseString: String,
-        numberOfItemsFromUserInputOnReceipt: Int
-    ) {
+    private fun tokenizeAndParseStringComplexAlgh(responseString: String, numberOfItemsFromUserInputOnReceipt: Int) {
         val responseRegexSplitter = TokensToListUsingMatchForRegexPriceAndRegexLetterInTokens()
         val tokenizedString: List<String> = responseString.tokenize()
-        addOperationsToResult(
-            responseRegexSplitter.matchTokensTitlesWithTokensValuesToListUsingRegex1(tokenizedString, numberOfItemsFromUserInputOnReceipt)
-        )
+        addOperationsToResult(responseRegexSplitter.matchTokensTitlesWithTokensValuesToListUsingRegex1(tokenizedString,
+            numberOfItemsFromUserInputOnReceipt))
 //        addOperationsToResult(
 //            responseRegexSplitter.matchTokensTitlesWithTokensValuesToListUsingRegex2(
 //                tokenizedString
