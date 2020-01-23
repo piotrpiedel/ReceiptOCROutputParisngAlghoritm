@@ -37,6 +37,8 @@ class TokensToListUsingMatchForRegexPriceAndRegexLetterInTokens {
                 ||filteredTokensList[tokenIndex].contains(regexLetterStarOrPlusOneToTenDigitsDotOrCommaTwoDigits)
             ) {
                 if (temporaryList.isNotEmpty()) {
+                    val string = temporaryList.joinToString()
+                    println("temporary list before adding to joinToString $string ")
                     listOfMatchedTokens.add(temporaryList.joinToString())
                     val valuePrice: String? =
                         regexOneToTenDigitsCommaOrDotTwoDigits.find(filteredTokensList[tokenIndex])?.value
