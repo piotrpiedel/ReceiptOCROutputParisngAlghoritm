@@ -2,7 +2,7 @@ package gdrive
 
 import util.*
 
-class TokensToListRegexPriceLetterMatcher{
+class MatchWithRegexPriceLetterMatcher{
 
     fun matchTitlesWithValuesToListUsingValueAndLetterRegex1(stringToSplitAndMatch: String): List<String> =
         matchTitlesWithValuesToListUsingValueAndLetterRegex(stringToSplitAndMatch, regexOneToTenDigitsCommaTwoDigitsWhiteSpaceAndLetterA_D)

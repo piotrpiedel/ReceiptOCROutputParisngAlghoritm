@@ -3,7 +3,7 @@ package gdrive
 import util.*
 
 //TODO: do this like match price normally but check if after regex next token is letter;
-class TokensToListUsingMatchForRegexPriceAndRegexLetterInTokens {
+class MatchTokensForRegexPriceAndRegexLetter {
     fun matchTokensTitlesWithTokensValuesToListUsingRegex1(tokensFromString: List<String>,
                                                            numberOfItems: Int): List<String> =
         matchToStringListUsingRegexDelimiter(tokensFromString, numberOfItems)
@@ -28,17 +28,18 @@ class TokensToListUsingMatchForRegexPriceAndRegexLetterInTokens {
                     .toMutableList()
         }
 
-        println("List of matched tokens from receipt every receipt $countTokensMatchingRegexCriteria")
+        println("List of matched tokens for current receipt (countTokensMatchingRegexCriteria): $countTokensMatchingRegexCriteria")
+        println("Is matched tokens number equal to given: ${countTokensMatchingRegexCriteria==numberOfItems}")
 
-        filteredTokensList.forEach { print("$it ") }
 
+        println("Filtered list for each print: ")
+        filteredTokensList.forEach { print("$it ||  ") }
+        println("\nEnd of list ")
         for (tokenIndex in filteredTokensList.indices) {
             if (filteredTokensList[tokenIndex].contains(regexLetterXOneToTenDigitsDotOrCommaTwoDigits)
                 ||filteredTokensList[tokenIndex].contains(regexLetterStarOrPlusOneToTenDigitsDotOrCommaTwoDigits)
             ) {
                 if (temporaryList.isNotEmpty()) {
-                    val string = temporaryList.joinToString()
-                    println("temporary list before adding to joinToString $string ")
                     listOfMatchedTokens.add(temporaryList.joinToString())
                     val valuePrice: String? =
                         regexOneToTenDigitsCommaOrDotTwoDigits.find(filteredTokensList[tokenIndex])?.value
@@ -51,7 +52,7 @@ class TokensToListUsingMatchForRegexPriceAndRegexLetterInTokens {
                 temporaryList.add(filteredTokensList[tokenIndex])
             }
         }
-        println("TokensToListUsingMatchForRegexPriceAndRegexLetterInTokens -> matchToStringListUsingRegexDelimiter-> listOfMatchedTokens $listOfMatchedTokens ")
+        println(" \t TokensToListUsingMatchForRegexPriceAndRegexLetterInTokens -> matchToStringListUsingRegexDelimiter-> listOfMatchedTokens $listOfMatchedTokens  ")
         return listOfMatchedTokens
     }
 

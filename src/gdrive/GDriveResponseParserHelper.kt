@@ -6,11 +6,9 @@ import java.util.*
 
 @Suppress("FunctionName")
 class GDriveResponseParserHelper {
-
-    //    private var responseOCRString: String = receipt1
+    private val tokenToListService = TokenToListService()
     private var dateForReceipt: Date? = null
     private var numberOfItems = 0;
-    var dividedStringPublicForDebugging: List<String> = mutableListOf()
     private val googleDriveResponseParsedOperationsHolder = ParsedOperationsHolder()
 
     fun parseStringFromOcrToListOfOperations(
@@ -29,44 +27,30 @@ class GDriveResponseParserHelper {
         val stringAfterFiscalReceiptWords = ResponseRegexSubstringUtil()
             .substringAfterAnyOfWordsFiscalReceiptOrReturnOrigin(stringWithReplacedNewLinesChars)
 
-//        tokenizeAndParseString(stringAfterFiscalReceiptWords)
-//        splitStringToTokensWithRegexPattern(stringAfterFiscalReceiptWords)
         tokenizeAndParseStringComplexAlgh(stringAfterFiscalReceiptWords, numberOfItems)
         return googleDriveResponseParsedOperationsHolder.listOfParsedOperationsFromOCRString
     }
 
     private fun tokenizeAndParseStringComplexAlgh(responseString: String, numberOfItemsFromUserInputOnReceipt: Int) {
-        val responseRegexSplitter = TokensToListUsingMatchForRegexPriceAndRegexLetterInTokens()
         val tokenizedString: List<String> = responseString.tokenize()
-        addOperationsToResult(responseRegexSplitter.matchTokensTitlesWithTokensValuesToListUsingRegex1(tokenizedString,
+        addOperationsToResult(tokenToListService.matchTokensTitlesWithTokensValuesToListUsingRegex1(tokenizedString,
             numberOfItemsFromUserInputOnReceipt))
-//        addOperationsToResult(
-//            responseRegexSplitter.matchTokensTitlesWithTokensValuesToListUsingRegex2(
-//                tokenizedString
-//            )
-//        )
-//        addOperationsToResult(
-//            responseRegexSplitter.matchTokensTitlesWithTokensValuesToListUsingRegex3(
-//                tokenizedString
-//            )
-//        )
     }
 
     private fun tokenizeAndParseString(responseString: String) {
-        val responseRegexSplitter = TokensToListRegexPriceMatcher()
         val tokenizedString: List<String> = responseString.tokenize()
         addOperationsToResult(
-            responseRegexSplitter.matchTokensTitlesWithTokensValuesToListUsingRegex1(
+            tokenToListService.matchTokensTitlesWithTokensValuesToListUsingRegex2(
                 tokenizedString
             )
         )
         addOperationsToResult(
-            responseRegexSplitter.matchTokensTitlesWithTokensValuesToListUsingRegex2(
+            tokenToListService.matchTokensTitlesWithTokensValuesToListUsingRegex3(
                 tokenizedString
             )
         )
         addOperationsToResult(
-            responseRegexSplitter.matchTokensTitlesWithTokensValuesToListUsingRegex3(
+            tokenToListService.matchTokensTitlesWithTokensValuesToListUsingRegex4(
                 tokenizedString
             )
         )
